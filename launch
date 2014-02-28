@@ -1,0 +1,4 @@
+#!/bin/sh
+
+./client/client & ./client/client & ./client/client & ./client/client &
+./server/serv.py

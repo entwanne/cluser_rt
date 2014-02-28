@@ -1,0 +1,13 @@
+#ifndef _DIMENSIONS_HPP_
+#define _DIMENSIONS_HPP_
+
+struct dim_t
+{
+public:
+  dim_t(int width_, int height_): width(width_), height(height_)
+  {}
+  int width;
+  int height;
+};
+
+#endif
