@@ -77,7 +77,6 @@ public:
 	  k *= cos_angle;
       }
     return (intensity * k);
-    return 0;
   }
   Point pos;
 };
