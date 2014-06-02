@@ -22,9 +22,9 @@ public:
   Consumer(const char* data, size_t size): _data(data), _size(size)
   {}
   template < typename T >
-  void read(T& buff, size_t buff_size=~0)
+  void read(T& buff, size_t buff_size=static_cast<size_t>(~0))
   {
-    if (buff_size == ~0)
+    if (buff_size == static_cast<size_t>(~0))
       buff_size = sizeof(T);
     if (buff_size > _size)
       throw Exception("End of stream reached");

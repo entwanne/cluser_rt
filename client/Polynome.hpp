@@ -9,11 +9,11 @@ public:
   {}
   void solve()
   {}
+protected:
+  std::array< double, N + 1 > _a;
 public:
   std::array< double, N > roots;
   int n_roots;
-protected:
-  std::array< double, N + 1 > _a;
 };
 
 template < >
