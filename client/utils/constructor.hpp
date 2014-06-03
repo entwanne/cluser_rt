@@ -1,5 +1,5 @@
-#ifndef _CONSTRUCTOR_HPP_
-#define _CONSTRUCTOR_HPP_
+#ifndef _UTILS_CONSTRUCTOR_HPP_
+#define _UTILS_CONSTRUCTOR_HPP_
 
 template < typename O, typename RO=O >
 class constructor

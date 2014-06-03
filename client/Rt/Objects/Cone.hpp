@@ -3,7 +3,7 @@
 
 #include <cmath>
 #include "Object.hpp"
-#include "../../mathutils.hpp"
+#include "../../utils/math.hpp"
 
 namespace Rt
 {

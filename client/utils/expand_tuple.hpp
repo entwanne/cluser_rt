@@ -1,5 +1,5 @@
-#ifndef _EXPAND_TUPLE_HPP_
-#define _EXPAND_TUPLE_HPP_
+#ifndef _UTILS_EXPAND_TUPLE_HPP_
+#define _UTILS_EXPAND_TUPLE_HPP_
 
 // Numeric sequences for unpacking tuples
 
