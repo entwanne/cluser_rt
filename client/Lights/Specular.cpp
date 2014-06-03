@@ -1,7 +1,5 @@
 #include "Specular.hpp"
-#include "../Scene.hpp"
-
-extern Scene* scene;
+#include "../scene.hpp"
 
 int Specular::color_at(const Intersection&) const
 {

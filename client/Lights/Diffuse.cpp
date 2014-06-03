@@ -1,7 +1,5 @@
 #include "Diffuse.hpp"
-#include "../Scene.hpp"
-
-extern Scene* scene;
+#include "../scene.hpp"
 
 int Diffuse::color_at(const Intersection& inter) const
 {
