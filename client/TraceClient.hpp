@@ -24,7 +24,15 @@ class TraceClient
 public:
 
   TraceClient(const std::string& conn): scene(nullptr),
-				     _calc(conn, std::bind(&TraceClient::calculate_chunk, this, std::placeholders::_1, std::placeholders::_2), std::bind(&TraceClient::initialize_scene, this, std::placeholders::_1, std::placeholders::_2))
+				     _calc(conn,
+					   std::bind(&TraceClient::calculate_chunk,
+						     this,
+						     std::placeholders::_1,
+						     std::placeholders::_2),
+					   std::bind(&TraceClient::initialize_scene,
+						     this,
+						     std::placeholders::_1,
+						     std::placeholders::_2))
   {}
 
   void start()
