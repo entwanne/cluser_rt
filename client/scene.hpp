@@ -1,3 +1,3 @@
 #include "Scene.hpp"
 
-extern Scene* scene;
+extern Rt::Scene* scene;

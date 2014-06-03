@@ -1,6 +1,8 @@
 #include <cmath>
 #include "Polynome.hpp"
 
+using namespace Rt;
+
 template < >
 void Polynome< 2 >::solve()
 {

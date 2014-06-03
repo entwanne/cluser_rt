@@ -1,6 +1,9 @@
 #include "Cone.hpp"
 #include "../Polynome.hpp"
 
+using namespace Rt;
+using namespace Rt::Objects;
+
 double Cone::intersect(const Ray& ray_) const
 {
   Ray ray = Ray(inv_matrix * ray_.src, inv_matrix * ray_.dir);

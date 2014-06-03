@@ -3,13 +3,21 @@
 
 #include "Object.hpp"
 
-class Sphere: public Object
+namespace Rt
 {
-public:
-  Sphere(int color, const matrix_t& matrix, const matrix_t& inv_matrix): Object(color, matrix, inv_matrix)
-  {}
-  double intersect(const Ray& ray_) const;
-  Vector normal(const Point& p) const;
-};
+  namespace Objects
+  {
+
+    class Sphere: public Object
+    {
+    public:
+      Sphere(int color, const matrix_t& matrix, const matrix_t& inv_matrix): Object(color, matrix, inv_matrix)
+      {}
+      double intersect(const Ray& ray_) const;
+      Vector normal(const Point& p) const;
+    };
+
+  }
+}
 
 #endif

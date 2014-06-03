@@ -1,6 +1,9 @@
 #include "Diffuse.hpp"
 #include "../scene.hpp"
 
+using namespace Rt;
+using namespace Rt::Lights;
+
 int Diffuse::color_at(const Intersection& inter) const
 {
   return inter.object->color & color;

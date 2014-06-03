@@ -3,10 +3,13 @@
 
 #include <array>
 
-typedef std::array< std::array< double, 4 >, 4 > matrix_t;
+namespace Rt
+{
+  typedef std::array< std::array< double, 4 >, 4 > matrix_t;
+}
 
 template < typename V >
-V operator*(const matrix_t& m, const V& v)
+V operator*(const Rt::matrix_t& m, const V& v)
 {
   V r(0, 0, 0);
   r.x = m[0][0] * v.x + m[0][1] * v.y + m[0][2] * v.z + m[0][3] * v.w;

@@ -3,13 +3,21 @@
 
 #include "Light.hpp"
 
-class Ambiant : public Light
+namespace Rt
 {
-public:
-  Ambiant(int color, double intensity) : Light(color, intensity)
-  {}
-  int color_at(const Intersection& inter) const;
-  double intensity_at(const Intersection&) const;
-};
+  namespace Lights
+  {
+
+    class Ambiant : public Light
+    {
+    public:
+      Ambiant(int color, double intensity) : Light(color, intensity)
+      {}
+      int color_at(const Intersection& inter) const;
+      double intensity_at(const Intersection&) const;
+    };
+
+  }
+}
 
 #endif

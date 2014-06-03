@@ -3,19 +3,24 @@
 
 #include "Vector.hpp"
 
-class Ray
+namespace Rt
 {
-public:
-  Ray(const Point& src_, const Vector& dir_): src(src_), dir(dir_)
-  {}
-  Point point(double k) const
+
+  class Ray
   {
-    return Point(src.x + k * dir.x,
-		 src.y + k * dir.y,
-		 src.z + k * dir.z);
-  }
-  Point src;
-  Vector dir;
-};
+  public:
+    Ray(const Point& src_, const Vector& dir_): src(src_), dir(dir_)
+    {}
+    Point point(double k) const
+    {
+      return Point(src.x + k * dir.x,
+		   src.y + k * dir.y,
+		   src.z + k * dir.z);
+    }
+    Point src;
+    Vector dir;
+  };
+
+}
 
 #endif

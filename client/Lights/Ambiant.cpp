@@ -1,5 +1,8 @@
 #include "Ambiant.hpp"
 
+using namespace Rt;
+using namespace Rt::Lights;
+
 int Ambiant::color_at(const Intersection& inter) const
 {
   return inter.object->color & color;

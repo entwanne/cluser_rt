@@ -55,6 +55,8 @@
 
 #include "Lights/Lights.hpp"
 
+using namespace Rt;
+
 Scene* scene = 0;
 
 #include "consumer_collect.hpp"
@@ -64,7 +66,7 @@ Scene* scene = 0;
 #include "ConstructorCaller.hpp"
 
 template < typename O, typename ... Types >
-Object* construct_object(Consumer& consumer)
+Objects::Object* construct_object(Consumer& consumer)
 {
   std::tuple< Types... > properties = collect< Types... >(consumer);
   int color;
@@ -73,18 +75,18 @@ Object* construct_object(Consumer& consumer)
   consumer.read(m);
   matrix_t inv_m;
   consumer.read(inv_m);
-  return call_expand_tuple< Object* >(ConstructorCaller< Object, O >(), properties, color, m, inv_m);
+  return call_expand_tuple< Objects::Object* >(ConstructorCaller< Objects::Object, O >(), properties, color, m, inv_m);
 }
 
 template < typename L, typename ... Types >
-Light* construct_light(Consumer& consumer)
+Lights::Light* construct_light(Consumer& consumer)
 {
   std::tuple< Types... > properties = collect< Types... >(consumer);
   int color;
   consumer.read(color);
   double intensity;
   consumer.read(intensity);
-  return call_expand_tuple< Light* >(ConstructorCaller< Light, L >(), properties, color, intensity);
+  return call_expand_tuple< Lights::Light* >(ConstructorCaller< Lights::Light, L >(), properties, color, intensity);
 }
 
 void initialize_scene(const char* data, size_t size)
@@ -106,11 +108,11 @@ void initialize_scene(const char* data, size_t size)
   int nb;
 
   // Lights
-  typedef std::map< std::string, Light* (*)(Consumer&) > light_types_t;
+  typedef std::map< std::string, Lights::Light* (*)(Consumer&) > light_types_t;
   light_types_t light_types;
-  light_types["AMB"] = construct_light< Ambiant >;
-  light_types["DIF"] = construct_light< Diffuse, double, double, double >;
-  light_types["SPE"] = construct_light< Specular, double, double, double >;
+  light_types["AMB"] = construct_light< Lights::Ambiant >;
+  light_types["DIF"] = construct_light< Lights::Diffuse, double, double, double >;
+  light_types["SPE"] = construct_light< Lights::Specular, double, double, double >;
   consumer.read(nb);
   for (int i = 0; i < nb; ++i)
     {
@@ -122,12 +124,12 @@ void initialize_scene(const char* data, size_t size)
     }
 
   // Objects
-  typedef std::map< std::string, Object* (*)(Consumer&) > object_types_t;
+  typedef std::map< std::string, Objects::Object* (*)(Consumer&) > object_types_t;
   object_types_t object_types;
-  object_types["PLA"] = construct_object< Plane >;
-  object_types["SPH"] = construct_object< Sphere >;
-  object_types["CYL"] = construct_object< Cylinder >;
-  object_types["CON"] = construct_object< Cone, double >;
+  object_types["PLA"] = construct_object< Objects::Plane >;
+  object_types["SPH"] = construct_object< Objects::Sphere >;
+  object_types["CYL"] = construct_object< Objects::Cylinder >;
+  object_types["CON"] = construct_object< Objects::Cone, double >;
   consumer.read(nb);
   for (int i = 0; i < nb; ++i)
     {

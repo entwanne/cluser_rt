@@ -1,6 +1,9 @@
 #include "Specular.hpp"
 #include "../scene.hpp"
 
+using namespace Rt;
+using namespace Rt::Lights;
+
 int Specular::color_at(const Intersection&) const
 {
   return color;

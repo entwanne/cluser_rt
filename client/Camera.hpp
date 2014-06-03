@@ -3,13 +3,18 @@
 
 #include "Vector.hpp"
 
-class Camera
+namespace Rt
 {
-public:
-  Camera(const Point& pos_, double dist_): pos(pos_), dist(dist_)
-  {}
-  Point pos;
-  double dist;
-};
+
+  class Camera
+  {
+  public:
+    Camera(const Point& pos_, double dist_): pos(pos_), dist(dist_)
+    {}
+    Point pos;
+    double dist;
+  };
+
+}
 
 #endif

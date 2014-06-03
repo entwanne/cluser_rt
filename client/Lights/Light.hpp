@@ -3,15 +3,23 @@
 
 #include "../Intersection.hpp"
 
-class Light
+namespace Rt
 {
-public:
-  Light(int color_, double intensity_) : color(color_), intensity(intensity_)
-  {}
-  virtual int color_at(const Intersection&) const = 0;
-  virtual double intensity_at(const Intersection&) const = 0;
-  int color;
-  double intensity;
-};
+  namespace Lights
+  {
+
+    class Light
+    {
+    public:
+      Light(int color_, double intensity_) : color(color_), intensity(intensity_)
+      {}
+      virtual int color_at(const Intersection&) const = 0;
+      virtual double intensity_at(const Intersection&) const = 0;
+      int color;
+      double intensity;
+    };
+
+  }
+}
 
 #endif
