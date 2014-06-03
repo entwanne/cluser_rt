@@ -1,6 +1,8 @@
 #ifndef _MATRIX_HPP_
 #define _MATRIX_HPP_
 
+#include <array>
+
 typedef std::array< std::array< double, 4 >, 4 > matrix_t;
 
 template < typename V >

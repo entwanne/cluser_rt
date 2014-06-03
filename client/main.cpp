@@ -31,7 +31,7 @@
 
 // Object
 
-#include "Object.hpp"
+#include "Objects/Object.hpp"
 
 // Intersection
 
@@ -39,7 +39,7 @@
 
 // Light
 
-#include "Light.hpp"
+#include "Lights/Light.hpp"
 
 // Scene
 
@@ -49,11 +49,11 @@
 
 // Objects
 
-#include "Objects.hpp"
+#include "Objects/Objects.hpp"
 
 // Lights
 
-#include "Lights.hpp"
+#include "Lights/Lights.hpp"
 
 Scene* scene = 0;
 

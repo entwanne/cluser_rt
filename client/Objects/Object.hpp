@@ -1,6 +1,10 @@
 #ifndef _OBJECT_HPP_
 #define _OBJECT_HPP_
 
+#include "../matrix.hpp"
+#include "../Vector.hpp"
+#include "../Ray.hpp"
+
 class Object
 {
 public:

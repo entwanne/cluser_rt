@@ -1,6 +1,9 @@
 #ifndef _POLYNOME_HPP_
 #define _POLYNOME_HPP_
 
+#include <array>
+#include "utils.hpp"
+
 template < int N >
 class Polynome
 {
@@ -16,17 +19,6 @@ public:
   int n_roots;
 };
 
-template < >
-void Polynome< 2 >::solve()
-{
-  double delta = SQR(_a[1]) - 4 * _a[0] * _a[2];
-  if (delta < 0)
-    return ;
-  roots[0] = (-_a[1] - sqrt(delta)) / (2 * _a[0]);
-  roots[1] = (-_a[1] + sqrt(delta)) / (2 * _a[0]);
-  n_roots = 2;
-}
-
 template < typename T >
 double polynome_min_positive_root(T& eq)
 {
@@ -40,5 +32,8 @@ double polynome_min_positive_root(T& eq)
     }
   return mink;
 }
+
+template < >
+void Polynome< 2 >::solve();
 
 #endif

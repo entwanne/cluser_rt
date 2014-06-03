@@ -1,6 +1,9 @@
 #ifndef _VECTOR_HPP_
 #define _VECTOR_HPP_
 
+#include <cmath>
+#include "utils.hpp"
+
 class Vector
 {
 public:
@@ -19,6 +22,7 @@ protected:
   Vector(double x_, double y_, double z_, double w_): x(x_), y(y_), z(z_), w(w_)
   {}
 };
+
 class Point: public Vector
 {
 public:

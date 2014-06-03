@@ -1,5 +1,7 @@
 #ifndef _RAY_HPP_
-#define _RAP_HPP_
+#define _RAY_HPP_
+
+#include "Vector.hpp"
 
 class Ray
 {
