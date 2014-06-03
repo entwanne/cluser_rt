@@ -4,8 +4,8 @@
 #include <map>
 #include <math.h>
 #include <iostream>
-#include "Calculator.hpp"
-#include "Consumer.hpp"
+#include "Network/Calculator.hpp"
+#include "Network/Consumer.hpp"
 
 #include "utils.hpp"
 
@@ -59,16 +59,16 @@ using namespace Rt;
 
 Scene* scene = 0;
 
-#include "consumer_collect.hpp"
+#include "Network/consumer_collect.hpp"
 
 #include "expand_tuple.hpp"
 
 #include "ConstructorCaller.hpp"
 
 template < typename O, typename ... Types >
-Objects::Object* construct_object(Consumer& consumer)
+Objects::Object* construct_object(Network::Consumer& consumer)
 {
-  std::tuple< Types... > properties = collect< Types... >(consumer);
+  std::tuple< Types... > properties = Network::collect< Types... >(consumer);
   int color;
   consumer.read(color);
   matrix_t m;
@@ -79,9 +79,9 @@ Objects::Object* construct_object(Consumer& consumer)
 }
 
 template < typename L, typename ... Types >
-Lights::Light* construct_light(Consumer& consumer)
+Lights::Light* construct_light(Network::Consumer& consumer)
 {
-  std::tuple< Types... > properties = collect< Types... >(consumer);
+  std::tuple< Types... > properties = Network::collect< Types... >(consumer);
   int color;
   consumer.read(color);
   double intensity;
@@ -91,7 +91,7 @@ Lights::Light* construct_light(Consumer& consumer)
 
 void initialize_scene(const char* data, size_t size)
 {
-  Consumer consumer(data, size);
+  Network::Consumer consumer(data, size);
 
   double cam[3];
   double dist;
@@ -108,7 +108,7 @@ void initialize_scene(const char* data, size_t size)
   int nb;
 
   // Lights
-  typedef std::map< std::string, Lights::Light* (*)(Consumer&) > light_types_t;
+  typedef std::map< std::string, Lights::Light* (*)(Network::Consumer&) > light_types_t;
   light_types_t light_types;
   light_types["AMB"] = construct_light< Lights::Ambiant >;
   light_types["DIF"] = construct_light< Lights::Diffuse, double, double, double >;
@@ -118,13 +118,13 @@ void initialize_scene(const char* data, size_t size)
     {
       char type[3];
       consumer.read(type);
-      light_types_t::const_iterator it = light_types.find(std::string(type, sizeof(type)));
+      auto it = light_types.find(std::string(type, sizeof(type)));
       if (it != light_types.end())
 	scene->add_light(it->second(consumer));
     }
 
   // Objects
-  typedef std::map< std::string, Objects::Object* (*)(Consumer&) > object_types_t;
+  typedef std::map< std::string, Objects::Object* (*)(Network::Consumer&) > object_types_t;
   object_types_t object_types;
   object_types["PLA"] = construct_object< Objects::Plane >;
   object_types["SPH"] = construct_object< Objects::Sphere >;
@@ -135,7 +135,7 @@ void initialize_scene(const char* data, size_t size)
     {
       char type[3];
       consumer.read(type);
-      object_types_t::const_iterator it = object_types.find(std::string(type, sizeof(type)));
+      auto it = object_types.find(std::string(type, sizeof(type)));
       if (it != object_types.end())
 	scene->add_object(it->second(consumer));
     }
@@ -164,6 +164,6 @@ void* calculate_chunk(int ys, size_t& size)
 
 int main()
 {
-  Calculator< int > calc("tcp://127.0.0.1:61385", calculate_chunk, initialize_scene);
+  Network::Calculator< int > calc("tcp://127.0.0.1:61385", calculate_chunk, initialize_scene);
   calc.start();
 }
