@@ -1,6 +1,8 @@
 #ifndef _CAMERA_HPP_
 #define _CAMERA_HPP_
 
+#include "Vector.hpp"
+
 class Camera
 {
 public:

@@ -1,6 +1,11 @@
 #ifndef _SCENE_HPP_
 #define _SCENE_HPP_
 
+#include <set>
+
+#include "Camera.hpp"
+#include "dimensions.hpp"
+
 class Scene
 {
 public:
