@@ -1,5 +1,5 @@
-#ifndef _RTCLIENT_HPP_
-#define _RTCLIENT_HPP_
+#ifndef _TRACECLIENT_HPP_
+#define _TRACECLIENT_HPP_
 
 #include <set>
 #include <array>
@@ -19,12 +19,12 @@
 
 using namespace Rt;
 
-class RtClient
+class TraceClient
 {
 public:
 
-  RtClient(const std::string& conn): scene(nullptr),
-				     _calc(conn, std::bind(&RtClient::calculate_chunk, this, std::placeholders::_1, std::placeholders::_2), std::bind(&RtClient::initialize_scene, this, std::placeholders::_1, std::placeholders::_2))
+  TraceClient(const std::string& conn): scene(nullptr),
+				     _calc(conn, std::bind(&TraceClient::calculate_chunk, this, std::placeholders::_1, std::placeholders::_2), std::bind(&TraceClient::initialize_scene, this, std::placeholders::_1, std::placeholders::_2))
   {}
 
   void start()
@@ -75,11 +75,11 @@ public:
     int nb;
 
     // Lights
-    typedef std::map<std::string, std::function<Lights::Light* (RtClient&, Network::Consumer&)>> light_types_t;
+    typedef std::map<std::string, std::function<Lights::Light* (TraceClient&, Network::Consumer&)>> light_types_t;
     light_types_t light_types;
-    light_types["AMB"] = &RtClient::construct_light<Lights::Ambiant>;
-    light_types["DIF"] = &RtClient::construct_light<Lights::Diffuse, double, double, double>;
-    light_types["SPE"] = &RtClient::construct_light<Lights::Specular, double, double, double>;
+    light_types["AMB"] = &TraceClient::construct_light<Lights::Ambiant>;
+    light_types["DIF"] = &TraceClient::construct_light<Lights::Diffuse, double, double, double>;
+    light_types["SPE"] = &TraceClient::construct_light<Lights::Specular, double, double, double>;
     consumer.read(nb);
     for (int i = 0; i < nb; ++i)
       {
@@ -91,12 +91,12 @@ public:
       }
 
     // Objects
-    typedef std::map< std::string, std::function<Objects::Object* (RtClient&, Network::Consumer&)>> object_types_t;
+    typedef std::map< std::string, std::function<Objects::Object* (TraceClient&, Network::Consumer&)>> object_types_t;
     object_types_t object_types;
-    object_types["PLA"] = &RtClient::construct_object<Objects::Plane>;
-    object_types["SPH"] = &RtClient::construct_object<Objects::Sphere>;
-    object_types["CYL"] = &RtClient::construct_object<Objects::Cylinder>;
-    object_types["CON"] = &RtClient::construct_object<Objects::Cone, double>;
+    object_types["PLA"] = &TraceClient::construct_object<Objects::Plane>;
+    object_types["SPH"] = &TraceClient::construct_object<Objects::Sphere>;
+    object_types["CYL"] = &TraceClient::construct_object<Objects::Cylinder>;
+    object_types["CON"] = &TraceClient::construct_object<Objects::Cone, double>;
     consumer.read(nb);
     for (int i = 0; i < nb; ++i)
       {
