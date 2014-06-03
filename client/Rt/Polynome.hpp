@@ -3,7 +3,7 @@
 
 #include <array>
 
-#include "../utils.hpp"
+#include "../mathutils.hpp"
 
 namespace Rt
 {

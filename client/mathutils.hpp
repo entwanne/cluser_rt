@@ -1,5 +1,5 @@
-#ifndef _UTILS_HPP_
-#define _UTILS_HPP_
+#ifndef _MATHUTILS_HPP_
+#define _MATHUTILS_HPP_
 
 #define SQR(x) ((x) * (x))
 #define LESS_AND_POSITIVE(a, b) ((a) > 0 && ((b) <= 0 || (a) < (b)))
