@@ -2,7 +2,8 @@
 #define _POLYNOME_HPP_
 
 #include <array>
-#include "utils.hpp"
+
+#include "../utils.hpp"
 
 namespace Rt
 {

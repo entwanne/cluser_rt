@@ -12,7 +12,7 @@ DEPSDBG	=	$(DEPS:%=%.dbg)
 NAMEDBG	=	$(NAME:%=%.dbg)
 
 LIB	=	-lzmq
-INC	=	 
+INC	=	
 CXXFLAGS =	-std=c++11 -W -Wall -O3 $(LIB) $(INC)
 
 $(NAME)	:	$(OBJ)

@@ -2,7 +2,7 @@
 #define _VECTOR_HPP_
 
 #include <cmath>
-#include "utils.hpp"
+#include "../utils.hpp"
 
 namespace Rt
 {
