@@ -1,5 +1,5 @@
-#ifndef _DIMENSIONS_HPP_
-#define _DIMENSIONS_HPP_
+#ifndef _RT_DIMENSIONS_HPP_
+#define _RT_DIMENSIONS_HPP_
 
 namespace Rt
 {

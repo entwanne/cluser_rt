@@ -1,5 +1,5 @@
-#ifndef _LIGHT_HPP_
-#define _LIGHT_HPP_
+#ifndef _RT_LIGHTS_LIGHT_HPP_
+#define _RT_LIGHTS_LIGHT_HPP_
 
 #include "../Intersection.hpp"
 

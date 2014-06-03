@@ -1,5 +1,5 @@
-#ifndef _OBJECT_HPP_
-#define _OBJECT_HPP_
+#ifndef _RT_OBJECTS_OBJECT_HPP_
+#define _RT_OBJECTS_OBJECT_HPP_
 
 #include "../matrix.hpp"
 #include "../Vector.hpp"

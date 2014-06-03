@@ -1,5 +1,5 @@
-#ifndef _SPECULAR_HPP_
-#define _SPECULAR_HPP_
+#ifndef _RT_LIGHTS_SPECULAR_HPP_
+#define _RT_LIGHTS_SPECULAR_HPP_
 
 #include "Light.hpp"
 

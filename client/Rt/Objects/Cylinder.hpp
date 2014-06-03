@@ -1,5 +1,5 @@
-#ifndef _CYLINDER_HPP_
-#define _CYLINDER_HPP_
+#ifndef _RT_OBJECTS_CYLINDER_HPP_
+#define _RT_OBJECTS_CYLINDER_HPP_
 
 #include "Object.hpp"
 

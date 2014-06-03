@@ -1,5 +1,5 @@
-#ifndef _VECTOR_HPP_
-#define _VECTOR_HPP_
+#ifndef _RT_VECTOR_HPP_
+#define _RT_VECTOR_HPP_
 
 #include <cmath>
 #include "../utils.hpp"

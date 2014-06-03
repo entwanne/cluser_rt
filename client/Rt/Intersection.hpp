@@ -1,5 +1,5 @@
-#ifndef _INTERSECTION_HPP_
-#define _INTERSECTION_HPP_
+#ifndef _RT_INTERSECTION_HPP_
+#define _RT_INTERSECTION_HPP_
 
 #include "Ray.hpp"
 #include "Objects/Object.hpp"

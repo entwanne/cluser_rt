@@ -1,5 +1,5 @@
-#ifndef _CALCULATOR_HPP_
-#define _CALCULATOR_HPP_
+#ifndef _NETWORK_CALCULATOR_HPP_
+#define _NETWORK_CALCULATOR_HPP_
 
 #include <zmq.hpp>
 #include <cstdlib>

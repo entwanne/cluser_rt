@@ -1,5 +1,5 @@
-#ifndef _SCENE_HPP_
-#define _SCENE_HPP_
+#ifndef _RT_SCENE_HPP_
+#define _RT_SCENE_HPP_
 
 #include <set>
 

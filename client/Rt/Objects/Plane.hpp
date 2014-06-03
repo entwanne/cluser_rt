@@ -1,5 +1,5 @@
-#ifndef _PLANE_HPP_
-#define _PLANE_HPP_
+#ifndef _RT_OBJECTS_PLANE_HPP_
+#define _RT_OBJECTS_PLANE_HPP_
 
 #include "Object.hpp"
 

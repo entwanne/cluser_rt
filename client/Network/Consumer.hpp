@@ -1,5 +1,5 @@
-#ifndef _CONSUMER_HPP_
-#define _CONSUMER_HPP_
+#ifndef _NETWORK_CONSUMER_HPP_
+#define _NETWORK_CONSUMER_HPP_
 
 #include <exception>
 

@@ -1,5 +1,5 @@
-#ifndef _MATRIX_HPP_
-#define _MATRIX_HPP_
+#ifndef _RT_MATRIX_HPP_
+#define _RT_MATRIX_HPP_
 
 #include <array>
 

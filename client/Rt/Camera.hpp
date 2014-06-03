@@ -1,5 +1,5 @@
-#ifndef _CAMERA_HPP_
-#define _CAMERA_HPP_
+#ifndef _RT_CAMERA_HPP_
+#define _RT_CAMERA_HPP_
 
 #include "Vector.hpp"
 

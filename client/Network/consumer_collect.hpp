@@ -1,5 +1,5 @@
-#ifndef _CONSUMER_COLLECT_HPP_
-#define _CONSUMER_COLLECT_HPP_
+#ifndef _NETWORK_CONSUMER_COLLECT_HPP_
+#define _NETWORK_CONSUMER_COLLECT_HPP_
 
 #include <tuple>
 

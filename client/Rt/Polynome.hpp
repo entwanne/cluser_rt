@@ -1,5 +1,5 @@
-#ifndef _POLYNOME_HPP_
-#define _POLYNOME_HPP_
+#ifndef _RT_POLYNOME_HPP_
+#define _RT_POLYNOME_HPP_
 
 #include <array>
 

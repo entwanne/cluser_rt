@@ -1,5 +1,5 @@
-#ifndef _LIGHTS_HPP_
-#define _LIGHTS_HPP_
+#ifndef _RT_LIGHTS_LIGHTS_HPP_
+#define _RT_LIGHTS_LIGHTS_HPP_
 
 #include "Ambiant.hpp"
 #include "Diffuse.hpp"

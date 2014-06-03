@@ -1,5 +1,5 @@
-#ifndef _OBJECTS_HPP_
-#define _OBJECTS_HPP_
+#ifndef _RT_OBJECTS_OBJECTS_HPP_
+#define _RT_OBJECTS_OBJECTS_HPP_
 
 #include "Plane.hpp"
 #include "Sphere.hpp"

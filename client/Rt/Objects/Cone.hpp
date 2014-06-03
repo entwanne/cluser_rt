@@ -1,5 +1,5 @@
-#ifndef _CONE_HPP_
-#define _CONE_HPP_
+#ifndef _RT_OBJECTS_CONE_HPP_
+#define _RT_OBJECTS_CONE_HPP_
 
 #include <cmath>
 #include "Object.hpp"

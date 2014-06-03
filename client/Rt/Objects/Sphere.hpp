@@ -1,5 +1,5 @@
-#ifndef _SPHERE_HPP_
-#define _SPHERE_HPP_
+#ifndef _RT_OBJECTS_SPHERE_HPP_
+#define _RT_OBJECTS_SPHERE_HPP_
 
 #include "Object.hpp"
 
