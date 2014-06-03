@@ -13,7 +13,7 @@ namespace Rt
     class Cone: public Object
     {
     public:
-      Cone(double angle, int color, const matrix_t& matrix, const matrix_t& inv_matrix): Object(color, matrix, inv_matrix)
+      Cone(double angle, int color, const matrix_t& matrix, const matrix_t& inv_matrix, Scene* scene): Object(color, matrix, inv_matrix, scene)
       {
 	coef = tan(angle);
 	coef = SQR(coef);

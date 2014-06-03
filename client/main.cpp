@@ -2,62 +2,17 @@
 #include <array>
 #include <tuple>
 #include <map>
-#include <math.h>
-#include <iostream>
+#include <functional>
 #include "Network/Calculator.hpp"
 #include "Network/Consumer.hpp"
 
-#include "utils.hpp"
-
-// Polynomes
-
-#include "Rt/Polynome.hpp"
-
-// Vectors
-
-#include "Rt/Vector.hpp"
-
-// Matrix
-
-#include "Rt/matrix.hpp"
-
-// Ray
-
-#include "Rt/Ray.hpp"
-
-// Camera
-
-#include "Rt/Camera.hpp"
-
-// Object
-
-#include "Rt/Objects/Object.hpp"
-
-// Intersection
-
-#include "Rt/Intersection.hpp"
-
-// Light
-
-#include "Rt/Lights/Light.hpp"
-
-// Scene
-
-#include "Rt/dimensions.hpp"
-
 #include "Rt/Scene.hpp"
-
-// Objects
-
 #include "Rt/Objects/Objects.hpp"
-
-// Lights
-
 #include "Rt/Lights/Lights.hpp"
 
 using namespace Rt;
 
-Scene* scene = 0;
+static Scene* scene = 0;
 
 #include "Network/consumer_collect.hpp"
 
@@ -75,7 +30,7 @@ Objects::Object* construct_object(Network::Consumer& consumer)
   consumer.read(m);
   matrix_t inv_m;
   consumer.read(inv_m);
-  return call_expand_tuple< Objects::Object* >(ConstructorCaller< Objects::Object, O >(), properties, color, m, inv_m);
+  return call_expand_tuple< Objects::Object* >(ConstructorCaller< Objects::Object, O >(), properties, color, m, inv_m, scene);
 }
 
 template < typename L, typename ... Types >
@@ -86,7 +41,7 @@ Lights::Light* construct_light(Network::Consumer& consumer)
   consumer.read(color);
   double intensity;
   consumer.read(intensity);
-  return call_expand_tuple< Lights::Light* >(ConstructorCaller< Lights::Light, L >(), properties, color, intensity);
+  return call_expand_tuple< Lights::Light* >(ConstructorCaller< Lights::Light, L >(), properties, color, intensity, scene);
 }
 
 void initialize_scene(const char* data, size_t size)
@@ -108,11 +63,11 @@ void initialize_scene(const char* data, size_t size)
   int nb;
 
   // Lights
-  typedef std::map< std::string, Lights::Light* (*)(Network::Consumer&) > light_types_t;
+  typedef std::map<std::string, std::function<Lights::Light* (Network::Consumer&)>> light_types_t;
   light_types_t light_types;
-  light_types["AMB"] = construct_light< Lights::Ambiant >;
-  light_types["DIF"] = construct_light< Lights::Diffuse, double, double, double >;
-  light_types["SPE"] = construct_light< Lights::Specular, double, double, double >;
+  light_types["AMB"] = construct_light<Lights::Ambiant>;
+  light_types["DIF"] = construct_light<Lights::Diffuse, double, double, double>;
+  light_types["SPE"] = construct_light<Lights::Specular, double, double, double>;
   consumer.read(nb);
   for (int i = 0; i < nb; ++i)
     {
@@ -124,12 +79,12 @@ void initialize_scene(const char* data, size_t size)
     }
 
   // Objects
-  typedef std::map< std::string, Objects::Object* (*)(Network::Consumer&) > object_types_t;
+  typedef std::map< std::string, std::function<Objects::Object* (Network::Consumer&)>> object_types_t;
   object_types_t object_types;
-  object_types["PLA"] = construct_object< Objects::Plane >;
-  object_types["SPH"] = construct_object< Objects::Sphere >;
-  object_types["CYL"] = construct_object< Objects::Cylinder >;
-  object_types["CON"] = construct_object< Objects::Cone, double >;
+  object_types["PLA"] = construct_object<Objects::Plane>;
+  object_types["SPH"] = construct_object<Objects::Sphere>;
+  object_types["CYL"] = construct_object<Objects::Cylinder>;
+  object_types["CON"] = construct_object<Objects::Cone, double>;
   consumer.read(nb);
   for (int i = 0; i < nb; ++i)
     {
@@ -162,8 +117,18 @@ void* calculate_chunk(int ys, size_t& size)
 
 #include <iostream>
 
+class Creator
+{
+public:
+  int increment(int i)
+  {
+    return i + 1;
+  }
+};
+
 int main()
 {
+  std::function< int(int) > f = std::bind(&Creator::increment, Creator(), std::placeholders::_1);
   Network::Calculator< int > calc("tcp://127.0.0.1:61385", calculate_chunk, initialize_scene);
   calc.start();
 }

@@ -33,11 +33,15 @@ namespace Rt
     template < typename T >
     inline T global_coords(const T& v) const
     {
+      if (!object)
+	throw NoIntersection();
       return object->matrix * v;
     }
     template < typename T >
     inline T local_coords(const T& v) const
     {
+      if (!object)
+	throw NoIntersection();
       return object->inv_matrix * v;
     }
     inline operator bool() const

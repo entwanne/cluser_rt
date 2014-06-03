@@ -5,6 +5,8 @@
 
 #include "Camera.hpp"
 #include "dimensions.hpp"
+#include "Objects/Object.hpp"
+#include "Lights/Light.hpp"
 
 namespace Rt
 {

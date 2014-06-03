@@ -1,5 +1,5 @@
 #include "Diffuse.hpp"
-#include "../scene.hpp"
+#include "../Scene.hpp"
 
 using namespace Rt;
 using namespace Rt::Lights;

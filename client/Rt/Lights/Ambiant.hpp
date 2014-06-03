@@ -11,7 +11,7 @@ namespace Rt
     class Ambiant : public Light
     {
     public:
-      Ambiant(int color, double intensity) : Light(color, intensity)
+      Ambiant(int color, double intensity, Scene* scene) : Light(color, intensity, scene)
       {}
       int color_at(const Intersection& inter) const;
       double intensity_at(const Intersection&) const;
