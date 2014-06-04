@@ -40,26 +40,18 @@ namespace Rt
     }
     int get_color(const Intersection& inter) const
     {
-      double imax = 1;
-      std::set< std::pair< int, double > > colors;
+      unsigned int rgb[3] = {0, 0, 0};
       for (auto it = _lights.cbegin(); it != _lights.cend(); ++it)
 	{
 	  int color = (*it)->color_at(inter);
 	  double intensity = (*it)->intensity_at(inter);
-	  if (intensity > imax)
-	    imax = intensity;
-	  colors.insert(std::make_pair(color, intensity));
-	}
-      unsigned int rgb[3] = {0, 0, 0};
-      for (auto it = colors.cbegin(); it != colors.cend(); ++it)
-	{
 	  unsigned char r, g, b;
-	  r = it->first / (256 * 256);
-	  g = (it->first / 256) % 256;
-	  b = it->first % 256;
-	  rgb[0] += r * it->second / imax;
-	  rgb[1] += g * it->second / imax;
-	  rgb[2] += b * it->second / imax;
+	  r = color / (256 * 256);
+	  g = (color / 256) % 256;
+	  b = color % 256;
+	  rgb[0] += r * intensity;
+	  rgb[1] += g * intensity;
+	  rgb[2] += b * intensity;
 	}
       unsigned int cmax = max(rgb[0], rgb[1], rgb[2]);
       if (cmax > 255)

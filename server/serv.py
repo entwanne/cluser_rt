@@ -45,13 +45,9 @@ def result(ys, chunk):
 # Ainsi, un objet O de la scène sera éclairé par diverses sources lumineuses L1, L2 et L3 par exemple
 # Pour chaque lumière k, on calcule Ck = Lk.C(O) et Ik = Lk.I(D, P, N)
 # (D, P et N sont respectivement le vecteur de visée, le point d'impact et la normale en ce point)
-# On détermine ensuite Imax = max(1, Ik for each k) = max(1, I1, I2, I3)
-# Puis on calcule C = SUM(Ck * Ik / Imax for each k) = (C1 * I1 / Imax) + (C2 * I2 / Imax) + (C3 * I3 / Imax)
-# L'addition entre lumières étant l'addition des composante une à une, majorée par 255 (Si a + b > 255, on garde 255 comme valeur)
-# Problème: si l'objet est sous 2 lumières blanches, il apparaît plus coloré qu'initialement (chacune de ses composantes sera doublée)
-# -> Pour une addition entre 2 couleurs: Procéder à un OR des composantes RGB en se basant sur des couleurs saturées au maximum, puis réappliquer la somme des saturation après addition
-# Nouveau problème si ajout avec du noir, couleur possédant une saturation de 100
-# Le premier problème en est-il réellement un ? Non.
+# Puis on calcule C = SUM(Ck * Ik for each k) = (C1 * I1) + (C2 * I2) + (C3 * I3)
+# Enfin, chaque composante de C est recalculée proprotionnellement de façon à ce qu'aucune ne dépasse 255
+# Par exemple avec (510, 100, 100), on obtiendrait (255, 50, 50)
 
 # Exemples:
 
