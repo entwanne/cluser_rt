@@ -7,6 +7,7 @@
 #include "dimensions.hpp"
 #include "Objects/Object.hpp"
 #include "Lights/Light.hpp"
+#include "Color.hpp"
 
 namespace Rt
 {
@@ -40,27 +41,10 @@ namespace Rt
     }
     int get_color(const Intersection& inter) const
     {
-      unsigned int rgb[3] = {0, 0, 0};
+      Color color(0);
       for (auto it = _lights.cbegin(); it != _lights.cend(); ++it)
-	{
-	  int color = (*it)->color_at(inter);
-	  double intensity = (*it)->intensity_at(inter);
-	  unsigned char r, g, b;
-	  r = color / (256 * 256);
-	  g = (color / 256) % 256;
-	  b = color % 256;
-	  rgb[0] += r * intensity;
-	  rgb[1] += g * intensity;
-	  rgb[2] += b * intensity;
-	}
-      unsigned int cmax = max(rgb[0], rgb[1], rgb[2]);
-      if (cmax > 255)
-	{
-	  rgb[0] = (rgb[0] * 255) / cmax;
-	  rgb[1] = (rgb[1] * 255) / cmax;
-	  rgb[2] = (rgb[2] * 255) / cmax;
-	}
-      return rgb[0] * 256 * 256 + rgb[1] * 256 + rgb[2];
+	color += Color((*it)->color_at(inter)) * (*it)->intensity_at(inter);
+      return color.to_int();
     }
     Ray get_screen_ray(int s_x, int s_y)
     {
