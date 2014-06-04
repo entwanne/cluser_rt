@@ -41,12 +41,9 @@ namespace Rt
     }
     int get_color(const Intersection& inter) const
     {
-      // Color color(0);
       ColorAdder adder;
       for (auto it = _lights.cbegin(); it != _lights.cend(); ++it)
-	// color += Color((*it)->color_at(inter)) * (*it)->intensity_at(inter);
 	adder.add((*it)->color_at(inter), (*it)->intensity_at(inter));
-      // return color.to_int();
       return adder.value();
     }
     Ray get_screen_ray(int s_x, int s_y)
