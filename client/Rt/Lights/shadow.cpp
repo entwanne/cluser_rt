@@ -8,5 +8,6 @@ bool Rt::Lights::shadow(Scene* scene, const Point& lum_pos, const Intersection& 
   Point point = inter.ray.point(inter.k);
   Vector to_obj = point - lum_pos;
   Intersection s = scene->intersect(Ray(lum_pos, to_obj));
+  // Not really good: an object can have its shadow on itself
   return (s.object != inter.object);
 }
