@@ -3,5 +3,7 @@ class Color:
         self.r, self.g, self.b = r, g, b
     def __int__(self):
         return self.r * 256 * 256 + self.g * 256 + self.b
+    def __eq__(self, rhs):
+        return int(self) == int(rhs)
 
 WHITE = Color(255, 255, 255)

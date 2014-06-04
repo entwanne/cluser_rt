@@ -2,11 +2,13 @@
 #define _RT_SCENE_HPP_
 
 #include <set>
+#include <vector>
 
 #include "Camera.hpp"
 #include "dimensions.hpp"
 #include "Objects/Object.hpp"
 #include "Lights/Light.hpp"
+#include "Textures/Texture.hpp"
 #include "color.hpp"
 
 namespace Rt
@@ -25,6 +27,14 @@ namespace Rt
     {
       _lights.insert(light);
     }
+    void add_texture(Textures::Texture* txt)
+    {
+      _textures.push_back(txt);
+    }
+    Textures::Texture* get_texture(int id) const
+    {
+      return _textures.at(id);
+    }
     Intersection intersect(const Ray& ray) const
     {
       Intersection inter(ray);
@@ -35,6 +45,7 @@ namespace Rt
 	    {
 	      inter.k = k;
 	      inter.object = *it;
+	      inter.color = inter.object->color_at(0, 0); // get real coords from object
 	    }
 	}
       return inter;
@@ -58,6 +69,7 @@ namespace Rt
   protected:
     std::set< Objects::Object* > _objects;
     std::set< Lights::Light* > _lights;
+    std::vector< Textures::Texture* > _textures;
   };
 
 }

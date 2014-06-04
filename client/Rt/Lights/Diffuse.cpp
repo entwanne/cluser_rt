@@ -7,7 +7,7 @@ using namespace Rt::Lights;
 
 int Diffuse::color_at(const Intersection& inter) const
 {
-  return inter.object->color & color;
+  return inter.color & color;
 }
 
 double Diffuse::intensity_at(const Intersection& inter) const

@@ -10,12 +10,15 @@
 #include "Network/Consumer.hpp"
 
 #include "Rt/Scene.hpp"
-#include "Rt/Objects/Objects.hpp"
-#include "Rt/Lights/Lights.hpp"
+#include "Rt/Objects/objects.hpp"
+#include "Rt/Lights/lights.hpp"
+#include "Rt/Textures/textures.hpp"
 
 #include "Network/consumer_collect.hpp"
 #include "utils/expand_tuple.hpp"
 #include "utils/constructor.hpp"
+
+#include <iostream>
 
 using namespace Rt;
 
@@ -38,6 +41,13 @@ public:
   void start()
   {
     _calc.start();
+  }
+
+  template < typename T, typename ... Types >
+  Textures::Texture* construct_texture(Network::Consumer& consumer)
+  {
+    std::tuple< Types... > properties = Network::collect< Types... >(consumer);
+    return call_expand_tuple< Textures::Texture* >(constructor< T, Textures::Texture >(), properties);
   }
 
   template < typename L, typename ... Types >
@@ -81,6 +91,20 @@ public:
     scene = new Scene(Camera(Point(cam[0], cam[1], cam[2]), dist), dim_t(scn_size[0], scn_size[1]), dim_t(scn_definition[0], scn_definition[1]));
 
     int nb;
+
+    // Textures
+    typedef std::map<std::string, std::function<Textures::Texture* (TraceClient&, Network::Consumer&)>> texture_types_t;
+    texture_types_t texture_types;
+    texture_types["COL"] = &TraceClient::construct_texture<Textures::ColorTexture, int>;
+    consumer.read(nb);
+    for (int i = 0; i < nb; ++i)
+      {
+	char type[3];
+	consumer.read(type);
+	auto it = texture_types.find(std::string(type, sizeof(type)));
+	if (it != texture_types.end())
+	  scene->add_texture(it->second(*this, consumer));
+      }
 
     // Lights
     typedef std::map<std::string, std::function<Lights::Light* (TraceClient&, Network::Consumer&)>> light_types_t;

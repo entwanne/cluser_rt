@@ -13,7 +13,7 @@ namespace Rt
   class Intersection
   {
   public:
-    Intersection(const Ray& ray_, Objects::Object* object_ = 0, double k_ = 0): ray(ray_), object(object_), k(k_)
+    Intersection(const Ray& ray_, Objects::Object* object_ = 0, double k_ = 0): ray(ray_), object(object_), k(k_), color()
     {}
     Point point() const
     {
@@ -58,6 +58,7 @@ namespace Rt
     const Ray& ray;
     Objects::Object* object;
     double k;
+    int color;
   };
 
 }

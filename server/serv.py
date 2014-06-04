@@ -5,6 +5,7 @@ from scene import Scene
 from camera import Camera
 from lights import *
 from objects import *
+from textures import *
 from color import Color
 
 width, height = 800, 600

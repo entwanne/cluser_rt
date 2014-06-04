@@ -11,7 +11,7 @@ namespace Rt
     class Sphere: public Object
     {
     public:
-      Sphere(int color, const matrix_t& matrix, const matrix_t& inv_matrix, Scene* scene): Object(color, matrix, inv_matrix, scene)
+      Sphere(int texture_id, const matrix_t& matrix, const matrix_t& inv_matrix, Scene* scene): Object(texture_id, matrix, inv_matrix, scene)
       {}
       double intersect(const Ray& ray_) const;
       Vector normal(const Point& p) const;
