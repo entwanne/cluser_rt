@@ -15,13 +15,13 @@ namespace Rt
     class Object
     {
     public:
-      Object(int color_, const matrix_t& matrix_, const matrix_t& inv_matrix_, Scene* scene_): color(color_), matrix(matrix_), inv_matrix(inv_matrix_), scene(scene_)
+      Object(int color_, const matrix_t& matrix_, const matrix_t& inv_matrix_, Scene* scene_): color(color_), matrix(matrix_), inv_matrix(inv_matrix_), normal_matrix(transpose(inv_matrix_)), scene(scene_)
       {}
       virtual double intersect(const Ray&) const = 0;
       // Unit vector of normal in simple coords
       virtual Vector normal(const Point&) const = 0;
       int color;
-      matrix_t matrix, inv_matrix;
+      matrix_t matrix, inv_matrix, normal_matrix;
 
       Scene* scene;
     };

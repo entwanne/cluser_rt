@@ -13,7 +13,7 @@ namespace Rt
   class Intersection
   {
   public:
-    Intersection(const Ray& ray_, Rt::Objects::Object* object_ = 0, double k_ = 0): ray(ray_), object(object_), k(k_)
+    Intersection(const Ray& ray_, Objects::Object* object_ = 0, double k_ = 0): ray(ray_), object(object_), k(k_)
     {}
     Point point() const
     {
@@ -28,7 +28,7 @@ namespace Rt
       Vector n = object->normal(local_coords(point()));
       if (n * (local_coords(ray.dir)) > 0)
 	n = Vector(-n.x, -n.y, -n.z);
-      return global_coords(n);
+      return normal_coords(n);
     }
     template < typename T >
     inline T global_coords(const T& v) const
@@ -44,12 +44,19 @@ namespace Rt
 	throw NoIntersection();
       return object->inv_matrix * v;
     }
+    template < typename T >
+    inline T normal_coords(const T& v) const
+    {
+      if (!object)
+	throw NoIntersection();
+      return object->normal_matrix * v;
+    }
     inline operator bool() const
     {
       return (object ? true : false);
     }
     const Ray& ray;
-    Rt::Objects::Object* object;
+    Objects::Object* object;
     double k;
   };
 

@@ -3,6 +3,7 @@
 
 #define SQR(x) ((x) * (x))
 #define LESS_AND_POSITIVE(a, b) ((a) > 0 && ((b) <= 0 || (a) < (b)))
+#define EPSILON 0.00001
 
 template < typename T >
 inline T max(T a)

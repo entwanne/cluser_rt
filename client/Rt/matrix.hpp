@@ -6,6 +6,15 @@
 namespace Rt
 {
   typedef std::array< std::array< double, 4 >, 4 > matrix_t;
+
+  inline matrix_t transpose(const matrix_t& m)
+  {
+    matrix_t n;
+    for (int y = 0; y < 4; ++y)
+      for (int x = 0; x < 4; ++x)
+	n[y][x] = m[x][y];
+    return n;
+  }
 }
 
 template < typename V >
