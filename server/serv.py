@@ -69,17 +69,17 @@ def result(ys, chunk):
 
 import struct
 
-import sfml as sf
+from PIL import Image
 def calc_img(filename):
-    img = sf.Image.create(width, height, sf.Color.BLACK)
+    img = Image.new('RGBA', (width, height))
     for ys, chunk in data.items():
         chunk = [ord(i) for i in struct.unpack('{}c'.format(4 * width * nb_lines_chunk), chunk)]
         chunk.reverse()
         for y in range(ys, ys + nb_lines_chunk):
             for x in range(width):
                 b, g, r, _ = [chunk.pop() for i in range(4)]
-                img[x, y] = sf.Color(r, g, b)
-    img.to_file(filename)
+                img.putpixel((x, y), (r, g, b))
+    img.save(filename)
 
 import time
 def timeit(method, *args, **kwargs):
