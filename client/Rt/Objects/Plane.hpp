@@ -15,6 +15,10 @@ namespace Rt
       {}
       double intersect(const Ray& ray_) const;
       Vector normal(const Point&) const;
+      virtual std::tuple<double, double> coords2d(const Point&) const
+      {
+	return std::make_tuple(0., 0.);
+      }
     };
 
   }

@@ -45,7 +45,9 @@ namespace Rt
 	    {
 	      inter.k = k;
 	      inter.object = *it;
-	      inter.color = inter.object->color_at(0, 0); // get real coords from object
+	      double x, y;
+	      std::tie(x, y) = inter.object->coords2d(inter.local_coords(inter.point()));
+	      inter.color = inter.object->color_at(x, y); // get real coords from object
 	    }
 	}
       return inter;

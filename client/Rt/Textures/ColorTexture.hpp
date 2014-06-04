@@ -12,7 +12,7 @@ namespace Rt
     {
     public:
       ColorTexture(int color_): color(color_) {}
-      virtual inline int color_at(int, int) const
+      virtual inline int color_at(double, double) const
       {
 	return color;
       }

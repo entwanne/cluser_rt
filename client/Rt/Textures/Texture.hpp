@@ -9,7 +9,7 @@ namespace Rt
     class Texture
     {
     public:
-      virtual int color_at(int x, int y) const = 0;
+      virtual int color_at(double x, double y) const = 0;
     };
 
   }

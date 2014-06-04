@@ -1,6 +1,8 @@
 #ifndef _RT_OBJECTS_OBJECT_HPP_
 #define _RT_OBJECTS_OBJECT_HPP_
 
+#include <tuple>
+
 #include "../Textures/Texture.hpp"
 #include "../matrix.hpp"
 #include "../Vector.hpp"
@@ -20,7 +22,8 @@ Object(int texture_id, const matrix_t& matrix_, const matrix_t& inv_matrix_, Sce
       virtual double intersect(const Ray&) const = 0;
       // Unit vector of normal in simple coords
       virtual Vector normal(const Point&) const = 0;
-      inline int color_at(int x, int y) const
+      virtual std::tuple<double, double> coords2d(const Point&) const = 0;
+      inline int color_at(double x, double y) const
       {
 	return texture->color_at(x, y);
       }
