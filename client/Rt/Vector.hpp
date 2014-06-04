@@ -7,14 +7,12 @@
 namespace Rt
 {
 
-  class Vector
+  class _Vector
   {
   public:
-    Vector(double x_, double y_, double z_): x(x_), y(y_), z(z_), w(0)
-    {}
-    inline double operator*(const Vector& o) const
+    inline double operator*(const _Vector& rhs) const
     {
-      return x * o.x + y * o.y + z * o.z;
+      return x * rhs.x + y * rhs.y + z * rhs.z;
     }
     inline double norm() const
     {
@@ -22,39 +20,53 @@ namespace Rt
     }
     double x, y, z, w;
   protected:
-    Vector(double x_, double y_, double z_, double w_): x(x_), y(y_), z(z_), w(w_)
+    _Vector(double x_, double y_, double z_, double w_): x(x_), y(y_), z(z_), w(w_)
     {}
   };
 
-  class Point: public Vector
+  // class Vector
+  // {
+  // public:
+  //   Vector(double x_, double y_, double z_): x(x_), y(y_), z(z_), w(0)
+  //   {}
+  //   inline double operator*(const Vector& o) const
+  //   {
+  //     return x * o.x + y * o.y + z * o.z;
+  //   }
+  //   inline double norm() const
+  //   {
+  //     return sqrt(SQR(*this));
+  //   }
+  //   double x, y, z, w;
+  // protected:
+  //   Vector(double x_, double y_, double z_, double w_): x(x_), y(y_), z(z_), w(w_)
+  //   {}
+  // };
+
+  class Vector: public _Vector
   {
   public:
-    Point(double x_, double y_, double z_): Vector(x_, y_, z_, 1.)
+    Vector(double x, double y, double z): _Vector(x, y, z, 0)
+    {}
+  };
+
+  class Point: public _Vector
+  {
+  public:
+    Point(double x, double y, double z): _Vector(x, y, z, 1.)
     {}
   };
 
 }
 
-template < typename V >
-V operator*(const V& v, double k)
-{
-  return V(k * v.x, k * v.y, k * v.z);
-}
-template < typename V >
-V operator*(double k, const V& v)
-{
-  return operator*(v, k);
-}
+Rt::Vector operator*(const Rt::Vector& v, double k);
+Rt::Vector operator*(double k, const Rt::Vector& v);
 
-template < typename V >
-V operator+(const V& v1, const V& v2)
-{
-  return V(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
-}
-template < typename V >
-V operator-(const V& v1, const V& v2)
-{
-  return V(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
-}
+Rt::Vector operator+(const Rt::Vector& v1, const Rt::Vector& v2);
+Rt::Point operator+(const Rt::Point& p, const Rt::Vector& v);
+Rt::Point operator+(const Rt::Vector& v, const Rt::Point& p);
+
+Rt::Vector operator-(const Rt::Vector& v1, const Rt::Vector& v2);
+Rt::Vector operator-(const Rt::Point& p1, const Rt::Point& p2);
 
 #endif
