@@ -1,6 +1,7 @@
 #ifndef _RT_OBJECTS_CYLINDER_HPP_
 #define _RT_OBJECTS_CYLINDER_HPP_
 
+#include <cmath>
 #include "Object.hpp"
 
 namespace Rt
@@ -15,9 +16,13 @@ namespace Rt
       {}
       double intersect(const Ray& ray_) const;
       Vector normal(const Point& p) const;
-      virtual std::tuple<double, double> coords2d(const Point&) const
+      virtual std::tuple<double, double> coords2d(const Point& p) const
       {
-	return std::make_tuple(0., 0.);
+	double u;
+	u = acos(p.y);
+	if (p.x < 0)
+	  u = -u;
+	return std::make_tuple(u, p.z);
       }
     };
 

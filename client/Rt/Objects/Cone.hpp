@@ -20,9 +20,18 @@ namespace Rt
       }
       double intersect(const Ray& ray_) const;
       Vector normal(const Point& p) const;
-      virtual std::tuple<double, double> coords2d(const Point&) const
+      virtual std::tuple<double, double> coords2d(const Point& p) const
       {
-	return std::make_tuple(0., 0.);
+	double u;
+	if (p.z == 0)
+	  u = 0;
+	else
+	  {
+	    u = acos(p.y / p.z);
+	    if (p.x < 0)
+	      u = -u;
+	  }
+	return std::make_tuple(u, p.z);
       }
       double coef;
     };

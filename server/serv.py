@@ -17,7 +17,10 @@ scene.add_light(Diffuse(-20, -40, 20, intensity=0.8))
 scene.add_light(Diffuse(40, 40, 5, intensity=0.4))
 scene.add_light(Specular(-20, -40, 20, intensity=0.6))
 
-scene.add_object(Sphere(10, x=50, y=30, scale_z=1.5, color=Color(r=255)))
+# Invert colors of bicolors
+
+#scene.add_object(Sphere(10, x=50, y=30, scale_z=1.5, color=Color(r=255)))
+scene.add_object(Sphere(10, x=50, y=30, scale_z=1.5, texture=Bicolor(color1=Color(r=255), color2=Color(255, 255, 255), vertical=True)))
 scene.add_object(Sphere(3, z=20, scale_x=5, color=Color(g=255)))
 scene.add_object(Sphere(5, color=Color(r=255, b=255)).stretch('x', angle_y=60))
 scene.add_object(Plane(z=-10, color=Color(255, 255, 255)))
@@ -25,9 +28,11 @@ scene.add_object(Plane(z=80, color=Color(255, 255, 255)))
 scene.add_object(Plane(x=-80, rot_y=90, color=Color(b=255)))
 scene.add_object(Plane(x=80, rot_y=90, color=Color(b=255)))
 scene.add_object(Plane(y=100, rot_x=90, color=Color(r=255, g=255)))
-scene.add_object(Cylinder(5, x=-80, y=100, color=Color(b=255)))
+#scene.add_object(Cylinder(5, x=-80, y=100, color=Color(b=255)))
+scene.add_object(Cylinder(5, x=-80, y=100, texture=Bicolor(Color(b=255), Color(g=255), True)))
 scene.add_object(Cylinder(5, x=80, y=100, color=Color(b=255)))
-scene.add_object(Cone(10, color=Color(r=128, g=128, b=128)))
+#scene.add_object(Cone(10, color=Color(r=128, g=128, b=128)))
+scene.add_object(Cone(10, texture=Bicolor(Color(r=128, g=128, b=128), Color(255, 128, 0))))
 
 nb_lines_chunk = 50
 dispatch = Dispatcher(61385, set(i for i in range(height) if i % nb_lines_chunk == 0), key_fmt='i')

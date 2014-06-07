@@ -96,6 +96,7 @@ public:
     typedef std::map<std::string, std::function<Textures::Texture* (TraceClient&, Network::Consumer&)>> texture_types_t;
     texture_types_t texture_types;
     texture_types["COL"] = &TraceClient::construct_texture<Textures::ColorTexture, int>;
+    texture_types["BIC"] = &TraceClient::construct_texture<Textures::Bicolor, int, int, bool>;
     consumer.read(nb);
     for (int i = 0; i < nb; ++i)
       {
