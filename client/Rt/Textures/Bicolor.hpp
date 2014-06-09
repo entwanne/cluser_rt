@@ -17,10 +17,10 @@ namespace Rt
       virtual inline int color_at(double u, double v) const
       {
 	if (vertical && v >= 0)
-	  return color1;
+	  return color2;
 	if (!vertical && u >= 0)
-	  return color1;
-	return color2;
+	  return color2;
+	return color1;
       }
       int color1, color2;
       bool vertical;
