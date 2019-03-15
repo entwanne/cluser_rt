@@ -1,4 +1,4 @@
 #!/bin/sh
 
-./client/client & ./client/client & ./client/client & ./client/client &
+./client/client & ./client/client & ./client/client & ./client/client & ./client_py/client.py &
 ./server/serv.py

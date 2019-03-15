@@ -45,7 +45,7 @@ class Dispatcher:
                     if self.result_func:
                         val = cmd[struct.calcsize(self.msg_fmt):] # cmd without the key
                         args = key + (val,)
-                        self.result_func(*args)
+                        self.result_func(*args) # (*key, val)
                     if self.keys:
                         self.rep.send(b'ok')
                     else:
